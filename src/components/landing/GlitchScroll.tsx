@@ -1,5 +1,4 @@
 import type { CSSProperties, ReactNode } from "react";
-import { useEffect, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +12,7 @@ export function GlitchSection({ children, className, id }: GlitchSectionProps) {
   const { ref, inView } = useInView<HTMLElement>({
     threshold: 0.05,
     rootMargin: "0px 0px -2% 0px",
-    once: false,
+    once: true,
   });
 
   return (
@@ -72,24 +71,17 @@ interface GlitchCardProps {
 
 export function GlitchCard({ children, className, delay = 0 }: GlitchCardProps) {
   const { ref, inView } = useInView<HTMLDivElement>({
-    threshold: 0.35,
+    threshold: 0.2,
     rootMargin: "0px 0px -5% 0px",
-    once: false,
+    once: true,
   });
-  const [seen, setSeen] = useState(false);
-
-  useEffect(() => {
-    if (inView) setSeen(true);
-  }, [inView]);
 
   return (
     <div
       ref={ref}
       className={cn(
-        "glitch-card relative",
+        "glitch-card relative is-settled",
         inView && "is-visible",
-        !seen && "is-pending",
-        seen && "is-settled",
         className,
       )}
       style={{ animationDelay: `${delay}ms` }}

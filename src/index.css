@@ -243,28 +243,65 @@
     100% {
       opacity: 1;
     }
-    41% {
+    38% {
       opacity: 1;
+    }
+    40% {
+      opacity: 0.65;
     }
     42% {
-      opacity: 0.4;
-    }
-    43% {
       opacity: 1;
     }
-    67% {
+    72% {
       opacity: 1;
     }
-    68% {
-      opacity: 0.55;
+    74% {
+      opacity: 0.7;
     }
-    69% {
+    76% {
       opacity: 1;
     }
   }
 
-  .animate-blood-flicker {
-    animation: blood-flicker 5s steps(1) infinite;
+  @keyframes blood-light-strip-pulse {
+    0%,
+    100% {
+      opacity: 0.72;
+      box-shadow: 0 0 12px rgba(232, 24, 58, 0.4);
+    }
+    50% {
+      opacity: 0.92;
+      box-shadow: 0 0 18px rgba(232, 24, 58, 0.58);
+    }
+  }
+
+  @keyframes blood-flicker-text {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    47% {
+      opacity: 1;
+    }
+    49% {
+      opacity: 0.94;
+    }
+    51% {
+      opacity: 1;
+    }
+    82% {
+      opacity: 1;
+    }
+    84% {
+      opacity: 0.96;
+    }
+    86% {
+      opacity: 1;
+    }
+  }
+
+  .animate-blood-flicker-text {
+    animation: blood-flicker-text 22s ease-in-out infinite;
   }
 
   .blood-light-strip {
@@ -284,7 +321,34 @@
       transparent 100%
     );
     box-shadow: 0 0 14px rgba(232, 24, 58, 0.55);
-    animation: blood-flicker 5s steps(1) infinite;
+    opacity: 0.85;
+    transition:
+      height 0.55s ease,
+      opacity 0.55s ease,
+      box-shadow 0.55s ease;
+  }
+
+  @keyframes blood-glow-flicker {
+    0%,
+    100%,
+    38%,
+    72% {
+      box-shadow: 0 0 32px -4px rgba(179, 18, 43, 0.65);
+    }
+    40% {
+      box-shadow: 0 0 14px -6px rgba(179, 18, 43, 0.35);
+    }
+    74% {
+      box-shadow: 0 0 18px -5px rgba(179, 18, 43, 0.45);
+    }
+  }
+
+  .animate-blood-flicker {
+    animation: blood-flicker 14s ease-in-out infinite;
+  }
+
+  .animate-blood-glow-flicker {
+    animation: blood-glow-flicker 14s ease-in-out infinite;
   }
 
   .cyber-panel-blood-light {
@@ -292,13 +356,11 @@
   }
 
   .cyber-panel-blood-light::after {
-    animation: blood-flicker 5s steps(1) infinite;
-    animation-delay: var(--blood-flicker-delay);
+    opacity: 0.85;
   }
 
   .blood-light-dot {
     box-shadow: 0 0 8px rgba(179, 18, 43, 0.8), 0 0 16px rgba(232, 24, 58, 0.4);
-    animation: blood-flicker 5s steps(1) infinite;
   }
 
   .blood-streak {
@@ -824,7 +886,8 @@
   }
 
   .glitch-section.is-visible .glitch-section-flash {
-    animation: scroll-glitch-scan 0.75s steps(6) forwards;
+    animation: none;
+    opacity: 0;
   }
 
   .glitch-section:not(.is-visible) .glitch-section-flash {
@@ -843,36 +906,83 @@
     opacity: 1;
   }
 
-  .glitch-card.is-pending:not(.is-visible) {
-    opacity: 0.45;
-    transform: translateY(24px);
-    filter: blur(4px);
-  }
-
-  .glitch-card.is-settled {
-    opacity: 1;
-    transform: none;
-    filter: none;
+  .glitch-card:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(16px);
   }
 
   .glitch-card.is-visible {
-    animation: glitch-card-in 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: card-fade-in 0.7s ease-out forwards;
   }
 
-  .glitch-card:not(.is-visible) {
+  .glitch-card.is-settled {
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .glitch-card.is-settled:hover {
+    transform: translateY(-5px);
+    border-color: rgba(179, 18, 43, 0.55) !important;
+    box-shadow:
+      0 0 0 1px rgba(232, 24, 58, 0.22),
+      0 18px 44px -14px rgba(179, 18, 43, 0.5);
+  }
+
+  .glitch-card.is-visible.is-settled:hover .blood-light-strip {
+    height: 3px;
+    opacity: 0.95;
+    box-shadow: 0 0 22px rgba(232, 24, 58, 0.68);
+  }
+
+  .glitch-card.is-settled:hover .glitch-card-flash,
+  .glitch-card.is-settled:hover .glitch-card-rgb {
     animation: none;
+    opacity: 0;
+  }
+
+  .glitch-card-step {
+    display: inline-block;
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.35s ease,
+      text-shadow 0.35s ease;
+  }
+
+  .glitch-card.is-settled:hover .glitch-card-step {
+    transform: translateX(3px) scale(1.06);
+    color: rgba(232, 24, 58, 0.85);
+    text-shadow:
+      0 0 20px rgba(232, 24, 58, 0.75),
+      0 0 40px rgba(179, 18, 43, 0.35);
+  }
+
+  .glitch-card-title {
+    transition: color 0.35s ease, letter-spacing 0.35s ease;
+  }
+
+  .glitch-card.is-settled:hover .glitch-card-title {
+    color: var(--foreground);
+    letter-spacing: 0.02em;
+  }
+
+  .glitch-card-text {
+    transition: color 0.35s ease;
+  }
+
+  .glitch-card.is-settled:hover .glitch-card-text {
+    color: rgba(230, 225, 211, 0.82);
   }
 
   .glitch-card.is-visible .blood-light-strip {
-    animation: blood-flicker 5s steps(1) infinite, glitch-card-strip 1.35s ease-out forwards;
+    animation: glitch-card-strip 1s ease-out forwards;
   }
 
-  .glitch-card.is-visible .glitch-card-flash {
-    animation: glitch-card-scan 1.2s steps(10) forwards;
-  }
-
+  .glitch-card.is-visible .glitch-card-flash,
   .glitch-card.is-visible .glitch-card-rgb {
-    animation: glitch-card-rgb 1.35s ease-out forwards;
+    animation: none;
+    opacity: 0;
   }
 
   .glitch-card:not(.is-visible) .glitch-card-flash,
@@ -882,7 +992,7 @@
   }
 
   .glitch-section.is-visible .glitch-reveal {
-    animation: glitch-reveal-in 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: reveal-fade-in 0.75s ease-out forwards;
   }
 
   .glitch-section:not(.is-visible) .glitch-reveal {
@@ -925,19 +1035,17 @@
   }
 
   .glitch-enter.is-visible .glitch-card {
-    animation: glitch-card-in 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: card-fade-in 0.7s ease-out forwards;
   }
 
-  .glitch-enter.is-visible .glitch-card .glitch-card-flash {
-    animation: glitch-card-scan 1.2s steps(10) forwards;
-  }
-
+  .glitch-enter.is-visible .glitch-card .glitch-card-flash,
   .glitch-enter.is-visible .glitch-card .glitch-card-rgb {
-    animation: glitch-card-rgb 1.35s ease-out forwards;
+    animation: none;
+    opacity: 0;
   }
 
   .glitch-enter.is-visible .glitch-card .blood-light-strip {
-    animation: blood-flicker 5s steps(1) infinite, glitch-card-strip 1.35s ease-out forwards;
+    animation: glitch-card-strip 1s ease-out forwards;
   }
 
   .glitch-card-flash {
@@ -1052,78 +1160,35 @@
     }
   }
 
-  @keyframes glitch-card-in {
-    0% {
+  @keyframes reveal-fade-in {
+    from {
       opacity: 0;
-      transform: translateY(40px) skewX(-3deg) scale(0.97);
-      filter: blur(10px);
-      clip-path: inset(0 100% 0 0);
-      box-shadow: none;
+      transform: translateY(14px);
     }
-    8% {
-      opacity: 0.35;
-      clip-path: inset(5% 0 60% 0);
-      transform: translateX(-18px) skewX(4deg) scale(1.01);
-      filter: blur(6px);
-      box-shadow:
-        6px 0 0 rgba(232, 24, 58, 0.5),
-        -6px 0 0 rgba(46, 230, 214, 0.35);
-    }
-    18% {
-      opacity: 0.7;
-      clip-path: inset(30% 0 30% 0);
-      transform: translateX(16px) skewX(-3deg);
-      filter: blur(3px);
-      box-shadow:
-        -8px 0 0 rgba(232, 24, 58, 0.55),
-        8px 0 0 rgba(46, 230, 214, 0.45);
-    }
-    28% {
-      opacity: 0.95;
-      clip-path: inset(55% 0 8% 0);
-      transform: translateX(-10px) skewX(2deg);
-      filter: blur(1px);
-    }
-    38% {
+    to {
       opacity: 1;
-      clip-path: inset(0 0 0 0);
-      transform: translateX(8px) translateY(-3px);
-      filter: blur(0);
-      box-shadow: 0 0 28px -6px rgba(179, 18, 43, 0.45);
+      transform: translateY(0);
     }
-    50% {
-      transform: translateX(-6px) translateY(1px);
-      box-shadow: 0 0 20px -8px rgba(46, 230, 214, 0.25);
+  }
+
+  @keyframes card-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
     }
-    62% {
-      transform: translateX(4px);
-    }
-    74% {
-      transform: translateX(-2px) translateY(-1px);
-    }
-    86% {
-      transform: translateX(1px);
-    }
-    100% {
+    to {
       opacity: 1;
-      transform: translateY(0) skewX(0) scale(1);
-      filter: blur(0);
-      clip-path: inset(0 0 0 0);
-      box-shadow: none;
+      transform: translateY(0);
     }
   }
 
   @keyframes glitch-card-strip {
     0% {
       opacity: 0;
-      transform: scaleX(0);
-    }
-    30% {
-      opacity: 1;
-      transform: scaleX(1);
+      transform: scaleX(0.85);
     }
     100% {
-      opacity: 0.6;
+      opacity: 0.85;
       transform: scaleX(1);
     }
   }
@@ -1133,11 +1198,14 @@
       opacity: 0;
       transform: translateY(-100%);
     }
-    12% {
-      opacity: 1;
+    15% {
+      opacity: 0.18;
     }
-    88% {
-      opacity: 0.55;
+    50% {
+      opacity: 0.28;
+    }
+    85% {
+      opacity: 0.12;
     }
     100% {
       opacity: 0;
@@ -1150,29 +1218,26 @@
     100% {
       opacity: 0;
     }
-    12% {
-      opacity: 1;
+    18% {
+      opacity: 0.35;
       box-shadow:
-        inset 10px 0 0 rgba(232, 24, 58, 0.75),
-        inset -10px 0 0 rgba(46, 230, 214, 0.6);
+        inset 8px 0 0 rgba(232, 24, 58, 0.45),
+        inset -8px 0 0 rgba(46, 230, 214, 0.35);
     }
-    28% {
-      opacity: 0.85;
+    40% {
+      opacity: 0.28;
       box-shadow:
-        inset -8px 0 0 rgba(232, 24, 58, 0.6),
-        inset 8px 0 0 rgba(46, 230, 214, 0.5);
+        inset -6px 0 0 rgba(232, 24, 58, 0.35),
+        inset 6px 0 0 rgba(46, 230, 214, 0.28);
     }
-    44% {
-      opacity: 0.65;
+    62% {
+      opacity: 0.18;
       box-shadow:
-        inset 6px 0 0 rgba(232, 24, 58, 0.45),
-        inset -6px 0 0 rgba(46, 230, 214, 0.35);
+        inset 4px 0 0 rgba(232, 24, 58, 0.25),
+        inset -4px 0 0 rgba(46, 230, 214, 0.2);
     }
-    60% {
-      opacity: 0.4;
-    }
-    78% {
-      opacity: 0.15;
+    82% {
+      opacity: 0.08;
     }
   }
 
@@ -1211,6 +1276,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .animate-blood-flicker,
+    .animate-blood-flicker-text,
+    .animate-blood-glow-flicker,
     .blood-light-strip,
     .blood-light-dot,
     .cyber-panel-blood-light::after {
@@ -1222,6 +1289,15 @@
     .glitch-card-rgb {
       animation: none !important;
       opacity: 0 !important;
+    }
+
+    .glitch-card.is-settled:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .glitch-card.is-settled:hover .glitch-card-step {
+      transform: none;
     }
 
     .glitch-card.is-pending:not(.is-visible) {

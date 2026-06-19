@@ -30,9 +30,9 @@ export function VerifySection() {
               </BloodLight>
             </SectionTitle>
             <p className="mt-4 text-muted-foreground">
-              When the fight ends, VERIFY shows whether ZEGON committed before you moved and
-              whether the sealed model only saw your history. That is the product difference
-              players and judges can actually test.
+              That is how a game stops feeling trucado. After the duel, VERIFY shows whether the AI
+              committed before you moved and whether the sealed model never saw your live pick —
+              proof you can open without trusting us.
             </p>
             <Button variant="outline" className="mt-8 font-code tracking-widest" asChild>
               <a href={`${GAME_URL}/verify.html`} target="_blank" rel="noopener noreferrer">

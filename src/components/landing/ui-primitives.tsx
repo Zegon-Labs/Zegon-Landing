@@ -8,15 +8,8 @@ interface BloodLightProps {
   flickerDelay?: number;
 }
 
-export function BloodLight({ children, className, flickerDelay = 0 }: BloodLightProps) {
-  return (
-    <span
-      className={cn("text-glow-blood animate-blood-flicker", className)}
-      style={{ animationDelay: `${flickerDelay}s` }}
-    >
-      {children}
-    </span>
-  );
+export function BloodLight({ children, className }: BloodLightProps) {
+  return <span className={cn("text-glow-blood", className)}>{children}</span>;
 }
 
 interface BloodLightDotProps {
@@ -24,11 +17,10 @@ interface BloodLightDotProps {
   flickerDelay?: number;
 }
 
-export function BloodLightDot({ className, flickerDelay = 0 }: BloodLightDotProps) {
+export function BloodLightDot({ className }: BloodLightDotProps) {
   return (
     <span
       className={cn("blood-light-dot inline-block size-1.5 rounded-full bg-accent", className)}
-      style={{ animationDelay: `${flickerDelay}s` }}
       aria-hidden
     />
   );
@@ -40,14 +32,13 @@ interface SectionLabelProps {
   flickerDelay?: number;
 }
 
-export function SectionLabel({ children, className, flickerDelay = 0 }: SectionLabelProps) {
+export function SectionLabel({ children, className }: SectionLabelProps) {
   return (
     <p
       className={cn(
-        "font-display mb-3 text-base uppercase tracking-[0.25em] text-accent text-glow-blood animate-blood-flicker",
+        "font-display mb-3 text-base uppercase tracking-[0.25em] text-accent text-glow-blood",
         className,
       )}
-      style={{ animationDelay: `${flickerDelay}s` }}
     >
       {children}
     </p>

@@ -35,15 +35,16 @@ export function OgSection() {
             </Badge>
           </div>
           <SectionTitle className="mt-3 max-w-3xl">
-            0G is what makes the{" "}
+            The stack that makes{" "}
             <BloodLight className="text-accent" flickerDelay={1.2}>
-              no-cheat claim
+              “not rigged”
             </BloodLight>{" "}
-            real.
+            checkable.
           </SectionTitle>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            A fair AI duel is not a UI trick. It needs sealed inference plus a public commit before
-            the player moves. That stack is what we ship in every real round.
+            Saying a game is fair is easy. Proving it — even in a pixel duel — needs sealed inference,
+            a public commit before the player moves, and proof that survives our servers. That is
+            what 0G enables for this use case.
           </p>
         </GlitchReveal>
 
@@ -52,8 +53,9 @@ export function OgSection() {
             <div className="flex items-start gap-3">
               <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Without 0G, &quot;the AI picked first&quot; is marketing copy. With 0G, it is a
-                timestamp on-chain and an attestation you can open after the duel.
+                Without verifiable commits, every AI game feels rigged the moment you lose. With 0G,
+                &quot;the AI picked first&quot; is a timestamp and an attestation — not a loading-screen
+                promise.
               </p>
             </div>
           </CyberPanel>

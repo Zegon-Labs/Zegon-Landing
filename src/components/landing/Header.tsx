@@ -5,8 +5,8 @@ import { BloodLightDot } from "@/components/landing/ui-primitives";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "#how-it-works", label: "How it works" },
-  { href: "#why-zegon", label: "Why ZEGON" },
+  { href: "#why-zegon", label: "The problem" },
+  { href: "#how-it-works", label: "Use case" },
   { href: "#0g", label: "0G" },
   { href: "#faq", label: "FAQ" },
 ];

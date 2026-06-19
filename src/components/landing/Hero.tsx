@@ -19,20 +19,22 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div className="space-y-8">
             <Badge variant="blood" className="font-display text-base tracking-[0.2em]">
-              SEALED INFERENCE · ON-CHAIN ONLY
+              USE CASE · PROVABLY FAIR AI GAMING
             </Badge>
 
             <div className="space-y-4">
               <h1 className="font-pixel text-xl leading-[1.6] sm:text-2xl lg:text-3xl">
-                <span className="block text-foreground">IT CAN&apos;T</span>
-                <span className="block text-foreground">SEE YOU.</span>
+                <span className="block text-foreground">AI GAMES</span>
+                <span className="block text-foreground">FEEL RIGGED.</span>
                 <BloodLight className="block text-accent" flickerDelay={0.3}>
-                  IT READS YOU.
+                  THEY SHOULDN&apos;T.
                 </BloodLight>
               </h1>
               <p className="max-w-xl text-xl leading-relaxed text-muted-foreground">
-                A gunslinger duel against a blindfolded AI. It reads your past moves, never your
-                current one. It locks its answer on-chain before you act.
+                You fight a black box. When you lose, you wonder if the server cheated — and you
+                can never prove it. ZEGON is a live demo that games can feel{" "}
+                <span className="text-foreground">real</span>: the AI locks its move on-chain
+                before you act, and you verify the proof after every duel.
               </p>
             </div>
 
@@ -43,7 +45,7 @@ export function Hero() {
                 <ArrowRight className="size-4" />
               </LaunchButton>
               <Button variant="outline" size="lg" className="font-display text-xl tracking-widest" asChild>
-                <a href="#how-it-works">HOW IT WORKS</a>
+                <a href="#why-zegon">THE PROBLEM</a>
               </Button>
             </div>
           </div>

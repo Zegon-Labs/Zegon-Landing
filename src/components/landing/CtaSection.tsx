@@ -11,14 +11,15 @@ export function CtaSection() {
 
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
         <GlitchTitle className="font-pixel text-xl leading-[1.6] sm:text-2xl lg:text-3xl">
-          <span className="block text-muted-foreground">OUTDRAW</span>
-          <span className="block text-foreground">THE BLIND.</span>
+          <span className="block text-muted-foreground">PLAY A DUEL</span>
+          <span className="block text-foreground">THAT FEELS REAL.</span>
           <BloodLight className="block text-accent" flickerDelay={0.6}>
-            PROVE IT.
+            VERIFY IT.
           </BloodLight>
         </GlitchTitle>
         <GlitchReveal className="mx-auto mt-6 max-w-lg text-xl text-muted-foreground" delay={150}>
-          Play the duel. Break your patterns. Then verify the AI locked in before you moved.
+          No trust-me fairness. Outdraw the blind AI, then open the proof that the round wasn&apos;t
+          rigged.
         </GlitchReveal>
         <GlitchReveal delay={250} className="mt-10 flex justify-center">
           <LaunchButton variant="accent" size="lg" className="font-display text-xl tracking-widest">

@@ -3,10 +3,10 @@ import { GlitchCard, GlitchReveal, GlitchSection } from "@/components/landing/Gl
 import { BloodLight, CyberPanel, SectionLabel, SectionTitle } from "@/components/landing/ui-primitives";
 
 const COMPARE = [
-  { label: "Sees your current move?", others: "Unknown", zegon: "Never" },
-  { label: "Locked before you act?", others: "No", zegon: "On-chain" },
-  { label: "Fairness proof?", others: "Trust us", zegon: "You verify" },
-  { label: "Core skill?", others: "Reflex", zegon: "Outread patterns" },
+  { label: "When you lose", others: "Was it rigged?", zegon: "You can check" },
+  { label: "AI move timing", others: "Hidden server", zegon: "Locked first" },
+  { label: "Can the house cheat?", others: "You'd never know", zegon: "Proof exposes it" },
+  { label: "Does the duel feel real?", others: "Often hollow", zegon: "Stakes land" },
 ];
 
 export function WhyZegonSection() {
@@ -14,16 +14,18 @@ export function WhyZegonSection() {
     <GlitchSection id="why-zegon" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <GlitchReveal>
-          <SectionLabel>Why ZEGON</SectionLabel>
+          <SectionLabel>The problem</SectionLabel>
           <SectionTitle className="max-w-3xl">
-            Same duel.
+            Fun games.
             <br />
             <BloodLight className="text-accent" flickerDelay={0.9}>
-              Different proof.
+              Fake fairness.
             </BloodLight>
           </SectionTitle>
-          <p className="mt-4 max-w-xl text-muted-foreground">
-            Most AI games ask you to trust the server. ZEGON lets you check it.
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Most AI opponents live on opaque servers. The moment you suspect a rigged read or a
+            retroactive cheat, the tension breaks — even if the game is “just for fun.” The problem
+            isn&apos;t AI in games. It&apos;s that players have no way to know the fight was real.
           </p>
         </GlitchReveal>
 
@@ -31,7 +33,7 @@ export function WhyZegonSection() {
           <GlitchCard className="overflow-hidden">
             <CyberPanel hover="none" className="relative z-0 h-full bg-card/80">
               <p className="font-code text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Typical AI duel
+                Typical AI game
               </p>
               <ul className="mt-6 space-y-4">
                 {COMPARE.map((row) => (
@@ -59,7 +61,7 @@ export function WhyZegonSection() {
             <CyberPanel hover="cyan" bloodLight className="relative z-0 h-full border-primary/25 bg-primary/5">
               <p className="font-code text-[10px] uppercase tracking-[0.2em]">
                 <BloodLight className="text-accent" flickerDelay={1.5}>
-                  ZEGON
+                  ZEGON use case
                 </BloodLight>
               </p>
               <ul className="mt-6 space-y-4">
@@ -80,9 +82,18 @@ export function WhyZegonSection() {
         <GlitchCard className="mt-6 overflow-hidden">
           <div className="relative z-0 grid gap-px bg-border/60 sm:grid-cols-3">
             {[
-              { tag: "COMMIT", line: "AI move on-chain first" },
-              { tag: "BLIND", line: "Your pick never enters the model" },
-              { tag: "VERIFY", line: "Open the proof after the duel" },
+              {
+                tag: "PROBLEM",
+                line: "Blind trust kills immersion in AI games",
+              },
+              {
+                tag: "USE CASE",
+                line: "A duel you can audit after every round",
+              },
+              {
+                tag: "OUTCOME",
+                line: "Gameplay that feels real — not rigged",
+              },
             ].map((item) => (
               <div key={item.tag} className="bg-card px-5 py-4 text-center sm:py-5">
                 <BloodLight className="font-code text-[11px] tracking-[0.25em] text-accent" flickerDelay={0.6}>

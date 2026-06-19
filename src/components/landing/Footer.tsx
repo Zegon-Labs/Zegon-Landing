@@ -4,8 +4,8 @@ import { GAME_URL } from "@/lib/utils";
 
 const LINKS = {
   product: [
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Why ZEGON", href: "#why-zegon" },
+    { label: "The problem", href: "#why-zegon" },
+    { label: "Use case", href: "#how-it-works" },
     { label: "0G", href: "#0g" },
     { label: "FAQ", href: "#faq" },
   ],
@@ -24,7 +24,8 @@ export function Footer() {
           <div className="lg:col-span-2">
             <p className="font-display text-3xl tracking-[0.2em]">ZEGON</p>
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              Blind AI gunslinger duel. It commits before you move. You verify after the fight.
+              A use case for provably fair AI gaming. Play the duel, then verify it wasn&apos;t
+              rigged.
             </p>
           </div>
 
@@ -73,7 +74,7 @@ export function Footer() {
           <p className="font-code text-[10px] uppercase tracking-[0.15em] text-dust">
             IT CAN&apos;T SEE YOU ·{" "}
             <BloodLight className="text-accent" flickerDelay={2.1}>
-              IT READS YOU
+              FEEL THE STAKES
             </BloodLight>
           </p>
         </div>

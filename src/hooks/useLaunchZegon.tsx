@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -19,14 +20,18 @@ interface LaunchContextValue {
 
 const LaunchContext = createContext<LaunchContextValue | null>(null);
 
-const SHOT_MS = 1500;
-const HOLD_MS = 3800;
+export const LAUNCH_SHOT_MS = 1500;
+export const LAUNCH_HOLD_MS = 3800;
+const LAUNCH_TOTAL_MS = LAUNCH_SHOT_MS + LAUNCH_HOLD_MS;
 
 export function LaunchProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<LaunchPhase>("idle");
+  const gameWindowRef = useRef<Window | null>(null);
 
   const launch = useCallback(() => {
     if (phase !== "idle") return;
+
+    gameWindowRef.current = window.open("about:blank", "_blank");
 
     setPhase("shot");
     document.body.classList.add("launch-active", "shot-shaking");
@@ -34,13 +39,24 @@ export function LaunchProvider({ children }: { children: ReactNode }) {
     window.setTimeout(() => {
       document.body.classList.remove("shot-shaking");
       setPhase("hold");
-      window.open(GAME_URL, "_blank", "noopener,noreferrer");
-    }, SHOT_MS);
+    }, LAUNCH_SHOT_MS);
 
     window.setTimeout(() => {
+      const gameWindow = gameWindowRef.current;
+      try {
+        if (gameWindow && !gameWindow.closed) {
+          gameWindow.location.href = GAME_URL;
+        } else {
+          window.open(GAME_URL, "_blank", "noopener,noreferrer");
+        }
+      } catch {
+        window.open(GAME_URL, "_blank", "noopener,noreferrer");
+      }
+
+      gameWindowRef.current = null;
       setPhase("idle");
       document.body.classList.remove("launch-active");
-    }, SHOT_MS + HOLD_MS);
+    }, LAUNCH_TOTAL_MS);
   }, [phase]);
 
   const value = useMemo(
@@ -55,7 +71,7 @@ export function LaunchProvider({ children }: { children: ReactNode }) {
   return (
     <LaunchContext.Provider value={value}>
       {children}
-      {phase !== "idle" && <LaunchOverlay phase={phase} />}
+      {phase !== "idle" && <LaunchOverlay phase={phase} holdMs={LAUNCH_HOLD_MS} />}
     </LaunchContext.Provider>
   );
 }

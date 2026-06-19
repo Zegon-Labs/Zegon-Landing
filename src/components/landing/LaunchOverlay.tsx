@@ -50,22 +50,24 @@ function ShotPhase() {
   );
 }
 
-function BloodHoldPhase() {
+function BloodHoldPhase({ holdMs }: { holdMs: number }) {
   const [lineIdx, setLineIdx] = useState(0);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const start = Date.now();
     const lineId = window.setInterval(() => {
       setLineIdx((i) => (i + 1) % HOLD_LINES.length);
-    }, 650);
+    }, 900);
     const progId = window.setInterval(() => {
-      setProgress((p) => (p >= 100 ? 100 : p + 4));
-    }, 140);
+      const elapsed = Date.now() - start;
+      setProgress(Math.min(100, (elapsed / holdMs) * 100));
+    }, 50);
     return () => {
       window.clearInterval(lineId);
       window.clearInterval(progId);
     };
-  }, []);
+  }, [holdMs]);
 
   return (
     <>
@@ -84,7 +86,7 @@ function BloodHoldPhase() {
         <div className="w-full max-w-md">
           <div className="flex items-center justify-between font-display text-xl text-accent">
             <span>LOADING</span>
-            <span className="animate-blood-flicker">{Math.min(progress, 100)}%</span>
+            <span>{Math.min(Math.round(progress), 100)}%</span>
           </div>
           <div className="mt-3 flex gap-1">
             {Array.from({ length: 20 }).map((_, i) => (
@@ -101,14 +103,14 @@ function BloodHoldPhase() {
         </div>
 
         <p className="font-display text-center text-lg tracking-widest text-bone/60">
-          Opening duel in new tab...
+          Game opens when the sequence completes...
         </p>
       </div>
     </>
   );
 }
 
-export function LaunchOverlay({ phase }: { phase: LaunchPhase }) {
+export function LaunchOverlay({ phase, holdMs }: { phase: LaunchPhase; holdMs: number }) {
   return (
     <div
       className="launch-overlay fixed inset-0 z-[200] overflow-hidden bg-[#1a0308]"
@@ -116,7 +118,7 @@ export function LaunchOverlay({ phase }: { phase: LaunchPhase }) {
       role="presentation"
     >
       {phase === "shot" && <ShotPhase />}
-      {phase === "hold" && <BloodHoldPhase />}
+      {phase === "hold" && <BloodHoldPhase holdMs={holdMs} />}
     </div>
   );
 }

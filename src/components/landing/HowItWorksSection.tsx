@@ -32,35 +32,34 @@ export function HowItWorksSection() {
     >
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <GlitchReveal>
-          <SectionLabel>How it works</SectionLabel>
+          <SectionLabel>The use case</SectionLabel>
           <SectionTitle className="max-w-3xl">
-            The AI moves first.
+            Proof the duel
             <BloodLight className="text-accent" flickerDelay={1.1}>
-              {" "}You move second.
+              {" "}wasn&apos;t rigged.
             </BloodLight>
           </SectionTitle>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            ZEGON is a simultaneous gunslinger duel built around one rule: the AI cannot react to
-            what you just clicked. It predicts from history, commits on-chain, then you respond.
-            Win by breaking the patterns it learns.
+            ZEGON is the playable use case: a gunslinger duel where the AI cannot rewrite its move
+            after seeing yours. It commits on-chain first, you respond blind, then anyone can verify
+            the round was fair.
           </p>
         </GlitchReveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((item, index) => (
+          {STEPS.map((item) => (
             <GlitchCard
               key={item.step}
               delay={0}
-              className="group overflow-hidden border border-border/60 bg-card p-6 transition-all hover:border-accent/40 hover:shadow-[0_0_24px_-8px_rgba(179,18,43,0.25)]"
+              className="overflow-hidden border border-border/60 bg-card p-6"
             >
-              <BloodLight
-                className="relative z-0 font-display text-4xl text-accent/40 group-hover:text-accent/70"
-                flickerDelay={index * 1.4}
-              >
+              <span className="glitch-card-step relative z-[2] font-display text-4xl text-accent/50 text-glow-blood" aria-hidden>
                 {item.step}
-              </BloodLight>
-              <h3 className="relative z-0 mt-4 text-base font-bold leading-snug">{item.title}</h3>
-              <p className="relative z-0 mt-2 text-sm leading-relaxed text-muted-foreground">
+              </span>
+              <h3 className="glitch-card-title relative z-[2] mt-4 text-base font-bold leading-snug">
+                {item.title}
+              </h3>
+              <p className="glitch-card-text relative z-[2] mt-2 text-sm leading-relaxed text-muted-foreground">
                 {item.text}
               </p>
             </GlitchCard>

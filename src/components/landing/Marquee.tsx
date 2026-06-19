@@ -2,15 +2,15 @@ import { GlitchEnter } from "@/components/landing/GlitchScroll";
 import { BloodLight } from "@/components/landing/ui-primitives";
 
 const ITEMS = [
+  "GAMES SHOULDN'T FEEL RIGGED",
+  "PROVABLY FAIR AI",
   "COMMIT BEFORE YOU MOVE",
-  "HISTORY ONLY INPUT",
+  "VERIFY AFTER DUEL",
+  "REAL STAKES",
+  "NO RETROACTIVE CHEAT",
   "SEALED INFERENCE",
   "ON-CHAIN PROOF",
-  "NO RETROACTIVE CHEAT",
-  "VERIFY AFTER DUEL",
-  "PATTERN DUEL",
-  "0G COMPUTE",
-  "0G CHAIN",
+  "0G USE CASE",
 ];
 
 export function Marquee() {

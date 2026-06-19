@@ -25,7 +25,8 @@ export function LaunchButton({
       size={size}
       className={cn(
         "font-display tracking-widest",
-        variant === "accent" && "animate-blood-flicker",
+        variant === "accent" &&
+          "shadow-[0_0_24px_-6px_rgba(179,18,43,0.55)] transition-shadow hover:shadow-[0_0_32px_-4px_rgba(179,18,43,0.7)]",
         className,
         isLaunching && "pointer-events-none opacity-80",
       )}

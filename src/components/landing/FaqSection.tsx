@@ -6,8 +6,12 @@ import { cn } from "@/lib/utils";
 
 const FAQ = [
   {
-    q: "How is this different from other AI games?",
-    a: "Most AI opponents run on opaque servers. ZEGON commits its move on-chain before you act and lets you verify the sealed model never received your current pick.",
+    q: "Why do AI games feel rigged?",
+    a: "Because the opponent runs on a server you cannot inspect. If the AI could see your move or change its answer after the fact, you'd never know. ZEGON fixes that with commit-reveal and post-duel verification — so the fight feels real.",
+  },
+  {
+    q: "Is this just a game, or a real use case?",
+    a: "Both. ZEGON is a playable duel and a demo for provably fair AI gaming: the same pattern can apply anywhere players need to trust a hidden opponent.",
   },
   {
     q: "Does ZEGON see my current move?",
@@ -15,15 +19,11 @@ const FAQ = [
   },
   {
     q: "Why commit before I play?",
-    a: "So ZEGON cannot react to your button press. The on-chain timestamp proves its move was locked first. Reveal after you choose closes the loop.",
-  },
-  {
-    q: "How do I win?",
-    a: "It is a pattern duel. ZEGON gets better at reading repeated habits. Stay unpredictable, force wrong reads, and outlast the blind gunslinger.",
+    a: "So the AI cannot react to your button press or rewrite its move after seeing yours. The on-chain timestamp proves it locked in first.",
   },
   {
     q: "What does 0G add?",
-    a: "Sealed inference on Compute, commit-reveal on Chain, persisted proof on Storage. Together they turn fair AI from a claim into something auditable.",
+    a: "Sealed inference on Compute, commit-reveal on Chain, persisted proof on Storage. Together they turn 'trust us' into something you can actually verify.",
   },
 ];
 
@@ -37,7 +37,7 @@ export function FaqSection() {
           <SectionLabel className="text-center">FAQ</SectionLabel>
           <SectionTitle>
             <BloodLight className="text-accent" flickerDelay={0.5}>
-              Fair duel.
+              Real fights.
             </BloodLight>{" "}
             Plain answers.
           </SectionTitle>
