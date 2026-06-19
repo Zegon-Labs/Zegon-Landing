@@ -3,14 +3,13 @@ import {
   useCallback,
   useContext,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
 import { LaunchOverlay } from "@/components/landing/LaunchOverlay";
 import { GAME_URL } from "@/lib/utils";
 
-export type LaunchPhase = "idle" | "shot" | "hold";
+export type LaunchPhase = "idle" | "shot";
 
 interface LaunchContextValue {
   launch: () => void;
@@ -20,44 +19,32 @@ interface LaunchContextValue {
 
 const LaunchContext = createContext<LaunchContextValue | null>(null);
 
-export const LAUNCH_SHOT_MS = 350;
-export const LAUNCH_HOLD_MS = 450;
-const LAUNCH_TOTAL_MS = LAUNCH_SHOT_MS + LAUNCH_HOLD_MS;
+export const LAUNCH_SHOT_MS = 380;
 
 export function LaunchProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<LaunchPhase>("idle");
-  const gameTabRef = useRef<Window | null>(null);
 
   const launch = useCallback(() => {
     if (phase !== "idle") return;
 
-    gameTabRef.current = window.open(GAME_URL, "_blank");
+    const gameTab = window.open(GAME_URL, "_blank");
+    if (!gameTab) {
+      window.location.assign(GAME_URL);
+      return;
+    }
 
     setPhase("shot");
-    document.body.classList.add("launch-active", "shot-shaking");
+    document.body.classList.add("shot-shaking");
 
     window.setTimeout(() => {
-      document.body.classList.remove("shot-shaking");
-      setPhase("hold");
-    }, LAUNCH_SHOT_MS);
-
-    window.setTimeout(() => {
-      const gameTab = gameTabRef.current;
-
-      if (gameTab && !gameTab.closed) {
-        try {
-          gameTab.focus();
-        } catch {
-          /* ignore cross-origin focus errors */
-        }
-      } else {
-        window.location.assign(GAME_URL);
+      try {
+        gameTab.focus();
+      } catch {
+        /* ignore */
       }
-
-      gameTabRef.current = null;
       setPhase("idle");
-      document.body.classList.remove("launch-active");
-    }, LAUNCH_TOTAL_MS);
+      document.body.classList.remove("shot-shaking");
+    }, LAUNCH_SHOT_MS);
   }, [phase]);
 
   const value = useMemo(
@@ -72,7 +59,7 @@ export function LaunchProvider({ children }: { children: ReactNode }) {
   return (
     <LaunchContext.Provider value={value}>
       {children}
-      {phase !== "idle" && <LaunchOverlay phase={phase} holdMs={LAUNCH_HOLD_MS} />}
+      {phase === "shot" && <LaunchOverlay />}
     </LaunchContext.Provider>
   );
 }
