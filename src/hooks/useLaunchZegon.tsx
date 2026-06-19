@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -19,15 +20,18 @@ interface LaunchContextValue {
 
 const LaunchContext = createContext<LaunchContextValue | null>(null);
 
-export const LAUNCH_SHOT_MS = 1500;
-export const LAUNCH_HOLD_MS = 3800;
+export const LAUNCH_SHOT_MS = 350;
+export const LAUNCH_HOLD_MS = 450;
 const LAUNCH_TOTAL_MS = LAUNCH_SHOT_MS + LAUNCH_HOLD_MS;
 
 export function LaunchProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<LaunchPhase>("idle");
+  const gameTabRef = useRef<Window | null>(null);
 
   const launch = useCallback(() => {
     if (phase !== "idle") return;
+
+    gameTabRef.current = window.open(GAME_URL, "_blank");
 
     setPhase("shot");
     document.body.classList.add("launch-active", "shot-shaking");
@@ -38,14 +42,21 @@ export function LaunchProvider({ children }: { children: ReactNode }) {
     }, LAUNCH_SHOT_MS);
 
     window.setTimeout(() => {
-      const gameTab = window.open(GAME_URL, "_blank", "noopener,noreferrer");
+      const gameTab = gameTabRef.current;
 
-      setPhase("idle");
-      document.body.classList.remove("launch-active");
-
-      if (!gameTab) {
+      if (gameTab && !gameTab.closed) {
+        try {
+          gameTab.focus();
+        } catch {
+          /* ignore cross-origin focus errors */
+        }
+      } else {
         window.location.assign(GAME_URL);
       }
+
+      gameTabRef.current = null;
+      setPhase("idle");
+      document.body.classList.remove("launch-active");
     }, LAUNCH_TOTAL_MS);
   }, [phase]);
 

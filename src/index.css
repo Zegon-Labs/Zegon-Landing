@@ -502,7 +502,7 @@
       rgba(100, 8, 20, 0.85) 60%,
       rgba(10, 9, 17, 0.95) 100%
     );
-    animation: shot-red-flash 1.4s ease-out forwards;
+    animation: shot-red-flash 0.45s ease-out forwards;
   }
 
   .shot-white-core {
@@ -512,7 +512,7 @@
       rgba(255, 255, 255, 0.6) 4%,
       transparent 18%
     );
-    animation: shot-white-core 1.4s ease-out forwards;
+    animation: shot-white-core 0.45s ease-out forwards;
   }
 
   @keyframes shot-red-flash {
@@ -623,7 +623,7 @@
     border-radius: 50%;
     border: 2px solid rgba(232, 24, 58, 0.9);
     box-shadow: 0 0 30px rgba(179, 18, 43, 0.8);
-    animation: shot-shockwave 0.8s ease-out 0.05s forwards;
+    animation: shot-shockwave 0.35s ease-out 0.02s forwards;
     opacity: 0;
   }
 
@@ -644,7 +644,7 @@
     background: linear-gradient(to top, rgba(232, 24, 58, 0.9), rgba(255, 220, 180, 1));
     border-radius: 1px;
     transform-origin: center 0;
-    animation: shot-spark 0.45s ease-out var(--spark-delay, 0s) forwards;
+    animation: shot-spark 0.3s ease-out var(--spark-delay, 0s) forwards;
     opacity: 0;
   }
 
@@ -667,7 +667,7 @@
     height: 12px;
     background: linear-gradient(135deg, #e8b23a, #c4922a);
     border-radius: 1px;
-    animation: shot-casing 0.7s ease-out 0.08s forwards;
+    animation: shot-casing 0.35s ease-out 0.04s forwards;
     opacity: 0;
   }
 
@@ -688,7 +688,7 @@
       0 0 60px rgba(232, 24, 58, 0.8),
       4px 0 #ff2e88,
       -4px 0 #2ee6d6;
-    animation: shot-bang 1.4s ease-out forwards;
+    animation: shot-bang 0.45s ease-out forwards;
     opacity: 0;
   }
 
@@ -718,7 +718,7 @@
 
   .shot-vignette-burst {
     background: radial-gradient(circle at 50% 62%, transparent 10%, rgba(179, 18, 43, 0.5) 100%);
-    animation: shot-vignette 1.4s ease-out forwards;
+    animation: shot-vignette 0.45s ease-out forwards;
     opacity: 0;
   }
 
@@ -742,7 +742,7 @@
       rgba(0, 0, 0, 0.25) 2px,
       rgba(0, 0, 0, 0.25) 4px
     );
-    animation: shot-scanlines 1.4s ease-out forwards;
+    animation: shot-scanlines 0.45s ease-out forwards;
     opacity: 0;
   }
 
