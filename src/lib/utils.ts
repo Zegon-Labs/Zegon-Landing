@@ -5,4 +5,5 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const GAME_URL = import.meta.env.VITE_GAME_URL ?? "https://zegon-dapp.vercel.app";
+export const GAME_URL =
+  import.meta.env.VITE_GAME_URL?.trim() || "https://zegon-dapp.vercel.app";

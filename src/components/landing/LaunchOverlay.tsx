@@ -103,7 +103,7 @@ function BloodHoldPhase({ holdMs }: { holdMs: number }) {
         </div>
 
         <p className="font-display text-center text-lg tracking-widest text-bone/60">
-          Game opens when the sequence completes...
+          Duel opens in a new tab when the sequence completes...
         </p>
       </div>
     </>
