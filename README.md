@@ -1,5 +1,7 @@
 # Zegon Landing
 
+**▶ Landing:** [zegon-landing.vercel.app](https://zegon-landing.vercel.app) · **Juego (dapp):** [zegon-dapp.vercel.app](https://zegon-dapp.vercel.app) · [Zegon-DApp repo](https://github.com/Zegon-Labs/Zegon-DApp)
+
 Official landing page for **ZEGON**, a pixel-art duel against a blind AI built on 0G for the Zero Cup hackathon.
 
 ## Development
