@@ -29,13 +29,13 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-void: #0a0911;
-  --color-ash: #14121c;
-  --color-smoke: #211e2e;
-  --color-fog: #3a3550;
+  --color-void: #050405;
+  --color-ash: #080607;
+  --color-smoke: #0e0c0d;
+  --color-fog: #1a1718;
   --color-bone: #e6e1d3;
   --color-dust: #9a93a8;
-  --color-cyan: #2ee6d6;
+  --color-cyan: #e8183a;
   --color-magenta: #ff2e88;
   --color-ember: #ff4d2e;
   --color-blood: #b3122b;
@@ -44,25 +44,25 @@
 }
 
 :root {
-  --background: #0a0911;
+  --background: #050405;
   --foreground: #e6e1d3;
-  --card: #14121c;
+  --card: #080607;
   --card-foreground: #e6e1d3;
-  --popover: #14121c;
+  --popover: #080607;
   --popover-foreground: #e6e1d3;
-  --primary: #2ee6d6;
-  --primary-foreground: #0a0911;
-  --secondary: #211e2e;
+  --primary: #e8183a;
+  --primary-foreground: #e6e1d3;
+  --secondary: #0e0c0d;
   --secondary-foreground: #e6e1d3;
-  --muted: #211e2e;
+  --muted: #0e0c0d;
   --muted-foreground: #9a93a8;
   --accent: #b3122b;
   --accent-bright: #e8183a;
   --accent-foreground: #e6e1d3;
   --destructive: #8a0e22;
-  --border: #3a3550;
-  --input: #3a3550;
-  --ring: #2ee6d6;
+  --border: #1a1718;
+  --input: #1a1718;
+  --ring: #b3122b;
   --radius: 0.25rem;
 }
 
@@ -138,7 +138,7 @@
   }
 
   .text-glow-cyan {
-    text-shadow: 0 0 30px rgba(46, 230, 214, 0.45);
+    text-shadow: 0 0 30px rgba(232, 24, 58, 0.45);
   }
 
   .text-glow-ember,
@@ -154,8 +154,8 @@
 
   .cyber-panel {
     position: relative;
-    background: linear-gradient(135deg, rgba(20, 18, 28, 0.95), rgba(10, 9, 17, 0.98));
-    border: 1px solid rgba(58, 53, 80, 0.8);
+    background: linear-gradient(135deg, rgba(9, 7, 8, 0.97), rgba(3, 2, 3, 0.99));
+    border: 1px solid rgba(26, 23, 24, 0.8);
   }
 
   .cyber-panel::before,
@@ -399,10 +399,10 @@
   }
 
   .cyber-hover:hover {
-    border-color: rgba(46, 230, 214, 0.5);
+    border-color: rgba(232, 24, 58, 0.5);
     box-shadow:
-      0 0 0 1px rgba(46, 230, 214, 0.15),
-      0 12px 40px -12px rgba(46, 230, 214, 0.2);
+      0 0 0 1px rgba(232, 24, 58, 0.15),
+      0 12px 40px -12px rgba(232, 24, 58, 0.2);
     transform: translateY(-2px);
   }
 
@@ -687,7 +687,7 @@
       0 0 20px rgba(179, 18, 43, 1),
       0 0 60px rgba(232, 24, 58, 0.8),
       4px 0 #ff2e88,
-      -4px 0 #2ee6d6;
+      -4px 0 #e8183a;
     animation: shot-bang 0.45s ease-out forwards;
     opacity: 0;
   }
@@ -896,10 +896,16 @@
     transform: none;
   }
 
-  .glitch-reveal,
-  .glitch-title,
-  .glitch-stagger > * {
-    opacity: 1;
+  /* Each reveal/title/stagger starts hidden; IO adds .is-visible to reveal individually */
+  .glitch-reveal:not(.is-visible),
+  .glitch-title:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .glitch-stagger:not(.is-visible) > * {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
   .glitch-card {
@@ -991,47 +997,25 @@
     opacity: 0;
   }
 
-  .glitch-section.is-visible .glitch-reveal {
-    animation: reveal-fade-in 0.75s ease-out forwards;
+  /* ── Independent per-element reveal (each has its own IO) ── */
+
+  .glitch-reveal.is-visible {
+    animation: reveal-fade-in 0.75s ease-out both;
   }
 
-  .glitch-section:not(.is-visible) .glitch-reveal {
-    animation: none;
+  .glitch-stagger.is-visible > * {
+    animation: glitch-stagger-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .glitch-section.is-visible .glitch-stagger > * {
-    animation: glitch-stagger-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
+  .glitch-stagger.is-visible > *:nth-child(1) { animation-delay: 0ms; }
+  .glitch-stagger.is-visible > *:nth-child(2) { animation-delay: 110ms; }
+  .glitch-stagger.is-visible > *:nth-child(3) { animation-delay: 220ms; }
+  .glitch-stagger.is-visible > *:nth-child(4) { animation-delay: 330ms; }
+  .glitch-stagger.is-visible > *:nth-child(5) { animation-delay: 440ms; }
+  .glitch-stagger.is-visible > *:nth-child(6) { animation-delay: 550ms; }
 
-  .glitch-section.is-visible .glitch-stagger > *:nth-child(1) {
-    animation-delay: 0ms;
-  }
-  .glitch-section.is-visible .glitch-stagger > *:nth-child(2) {
-    animation-delay: 100ms;
-  }
-  .glitch-section.is-visible .glitch-stagger > *:nth-child(3) {
-    animation-delay: 200ms;
-  }
-  .glitch-section.is-visible .glitch-stagger > *:nth-child(4) {
-    animation-delay: 300ms;
-  }
-  .glitch-section.is-visible .glitch-stagger > *:nth-child(5) {
-    animation-delay: 400ms;
-  }
-  .glitch-section.is-visible .glitch-stagger > *:nth-child(6) {
-    animation-delay: 500ms;
-  }
-
-  .glitch-section:not(.is-visible) .glitch-stagger > * {
-    animation: none;
-  }
-
-  .glitch-section.is-visible .glitch-title {
-    animation: glitch-title-in 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .glitch-section:not(.is-visible) .glitch-title {
-    animation: none;
+  .glitch-title.is-visible {
+    animation: glitch-title-in 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .glitch-enter.is-visible .glitch-card {
@@ -1274,13 +1258,77 @@
     }
   }
 
+  /* ── Slide deck transition flash ── */
+  @keyframes slide-glitch-flash {
+    0% {
+      opacity: 1;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(179, 18, 43, 0.22) 3px,
+        rgba(179, 18, 43, 0.22) 4px
+      );
+    }
+    40% {
+      opacity: 0.55;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .slide-glitch-flash {
+    mix-blend-mode: screen;
+    animation: slide-glitch-flash 160ms steps(3) forwards;
+  }
+
+  /* ── VS Section ── */
+  @keyframes vs-glow-pulse {
+    0%, 100% {
+      filter:
+        drop-shadow(0 0 10px rgba(179, 18, 43, 0.65))
+        drop-shadow(0 0 28px rgba(232, 24, 58, 0.3));
+    }
+    50% {
+      filter:
+        drop-shadow(0 0 22px rgba(179, 18, 43, 0.95))
+        drop-shadow(0 0 55px rgba(232, 24, 58, 0.55));
+    }
+  }
+
+  @keyframes vs-flicker {
+    0%, 93%, 100% { opacity: 1; }
+    94%           { opacity: 0.55; }
+    95%           { opacity: 1; }
+    97%           { opacity: 0.35; }
+    98%           { opacity: 0.9; }
+  }
+
+  .vs-figure-glow {
+    animation: vs-glow-pulse 3.2s ease-in-out infinite;
+  }
+
+  .vs-text-glow {
+    text-shadow:
+      0 0 24px rgba(179, 18, 43, 0.7),
+      0 0 60px rgba(232, 24, 58, 0.35);
+  }
+
+  .vs-flicker {
+    animation: vs-flicker 5s ease-in-out infinite;
+  }
+  /* ── END VS Section ── */
+
   @media (prefers-reduced-motion: reduce) {
     .animate-blood-flicker,
     .animate-blood-flicker-text,
     .animate-blood-glow-flicker,
     .blood-light-strip,
     .blood-light-dot,
-    .cyber-panel-blood-light::after {
+    .cyber-panel-blood-light::after,
+    .vs-figure-glow,
+    .vs-flicker {
       animation: none !important;
       opacity: 1 !important;
     }
@@ -1306,10 +1354,15 @@
       filter: none !important;
     }
 
+    /* Show everything immediately — no reveal animations */
     .glitch-reveal,
+    .glitch-reveal:not(.is-visible),
     .glitch-stagger > *,
+    .glitch-stagger:not(.is-visible) > *,
     .glitch-card,
-    .glitch-title {
+    .glitch-card:not(.is-visible),
+    .glitch-title,
+    .glitch-title:not(.is-visible) {
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;

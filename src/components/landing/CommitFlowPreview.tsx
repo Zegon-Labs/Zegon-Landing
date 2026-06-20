@@ -59,7 +59,7 @@ export function CommitFlowPreview() {
                 key={item.id}
                 className={`flex items-start gap-3 border px-3 py-3 transition-all duration-500 ${
                   active
-                    ? "border-primary/50 bg-primary/5 shadow-[0_0_20px_-8px_rgba(46,230,214,0.3)]"
+                    ? "border-primary/50 bg-primary/5 shadow-[0_0_20px_-8px_rgba(232,24,58,0.25)]"
                     : done
                       ? "border-border/40 bg-secondary/20 opacity-70"
                       : "border-border/30 opacity-40"

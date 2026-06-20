@@ -18,9 +18,11 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="group flex items-center gap-2">
-          <span className="font-display text-2xl tracking-[0.2em] text-foreground transition-colors group-hover:text-primary">
-            ZEGON
-          </span>
+          <img
+            src="/logo_text.png"
+            alt="ZEGON"
+            className="h-10 w-auto object-contain transition-opacity group-hover:opacity-80 mix-blend-screen"
+          />
           <BloodLightDot className="hidden sm:block" flickerDelay={0.2} />
         </a>
 

@@ -1,5 +1,6 @@
 import { BloodFlares } from "@/components/landing/BloodFlares";
 import { CtaSection } from "@/components/landing/CtaSection";
+import { DuelLogSection } from "@/components/landing/DuelLogSection";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { Footer } from "@/components/landing/Footer";
 import { Header } from "@/components/landing/Header";
@@ -7,7 +8,9 @@ import { Hero } from "@/components/landing/Hero";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 import { Marquee } from "@/components/landing/Marquee";
 import { OgSection } from "@/components/landing/OgSection";
+import { ScrollStorySection } from "@/components/landing/ScrollStorySection";
 import { VerifySection } from "@/components/landing/VerifySection";
+import { VsSection } from "@/components/landing/VsSection";
 import { WhyZegonSection } from "@/components/landing/WhyZegonSection";
 
 export function App() {
@@ -17,10 +20,13 @@ export function App() {
       <div className="pointer-events-none fixed inset-0 noise opacity-40" />
       <Header />
       <main className="relative z-10">
+        <VsSection />
         <Hero />
         <Marquee />
         <HowItWorksSection />
+        <DuelLogSection />
         <WhyZegonSection />
+        <ScrollStorySection />
         <OgSection />
         <VerifySection />
         <FaqSection />

@@ -34,10 +34,18 @@ interface GlitchRevealProps {
   style?: CSSProperties;
 }
 
+/** Each instance has its own IO — reveals independently as it enters the viewport. */
 export function GlitchReveal({ children, className, delay = 0, style }: GlitchRevealProps) {
+  const { ref, inView } = useInView<HTMLDivElement>({
+    threshold: 0.08,
+    rootMargin: "0px 0px -4% 0px",
+    once: true,
+  });
+
   return (
     <div
-      className={cn("glitch-reveal", className)}
+      ref={ref}
+      className={cn("glitch-reveal", inView && "is-visible", className)}
       style={{ animationDelay: `${delay}ms`, ...style }}
     >
       {children}
@@ -50,8 +58,19 @@ interface GlitchStaggerProps {
   className?: string;
 }
 
+/** Children stagger in when this container enters the viewport. */
 export function GlitchStagger({ children, className }: GlitchStaggerProps) {
-  return <div className={cn("glitch-stagger", className)}>{children}</div>;
+  const { ref, inView } = useInView<HTMLDivElement>({
+    threshold: 0.08,
+    rootMargin: "0px 0px -4% 0px",
+    once: true,
+  });
+
+  return (
+    <div ref={ref} className={cn("glitch-stagger", inView && "is-visible", className)}>
+      {children}
+    </div>
+  );
 }
 
 interface GlitchTitleProps {
@@ -59,8 +78,19 @@ interface GlitchTitleProps {
   className?: string;
 }
 
+/** Title with its own IO — glitch-types in when it enters the viewport. */
 export function GlitchTitle({ children, className }: GlitchTitleProps) {
-  return <h2 className={cn("glitch-title", className)}>{children}</h2>;
+  const { ref, inView } = useInView<HTMLHeadingElement>({
+    threshold: 0.08,
+    rootMargin: "0px 0px -4% 0px",
+    once: true,
+  });
+
+  return (
+    <h2 ref={ref} className={cn("glitch-title", inView && "is-visible", className)}>
+      {children}
+    </h2>
+  );
 }
 
 interface GlitchCardProps {
@@ -71,7 +101,7 @@ interface GlitchCardProps {
 
 export function GlitchCard({ children, className, delay = 0 }: GlitchCardProps) {
   const { ref, inView } = useInView<HTMLDivElement>({
-    threshold: 0.2,
+    threshold: 0.15,
     rootMargin: "0px 0px -5% 0px",
     once: true,
   });
