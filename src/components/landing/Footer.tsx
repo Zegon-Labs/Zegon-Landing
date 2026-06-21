@@ -22,7 +22,11 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <p className="font-display text-3xl tracking-[0.2em]">ZEGON</p>
+            <img
+              src="/logo_text.png"
+              alt="ZEGON"
+              className="h-12 w-auto object-contain mix-blend-screen sm:h-14"
+            />
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
               A use case for provably fair AI gaming. Play the duel, then verify it wasn&apos;t
               rigged.
